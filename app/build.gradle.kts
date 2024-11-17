@@ -12,8 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.challenge.rickandmorty"
-        minSdk = 23
-        targetSdk = 34
+        minSdk = 24
         versionCode = 1
         versionName = "1.0"
 
@@ -63,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+
     //PAGING
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
@@ -87,4 +87,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(project(":core"))
 }
