@@ -20,7 +20,7 @@ internal class CharacterRepositoryImpl @Inject constructor(
 
     override suspend fun getAllCharacters(): Flow<PagingData<CharacterEntity>> {
         return Pager(
-            config = PagingConfig(pageSize = 20),
+            config = PagingConfig(pageSize = 10),
             remoteMediator = CharacterRemoteMediator(
                 localDatabase = database,
                 apiService = apiService,
