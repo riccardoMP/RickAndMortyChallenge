@@ -6,6 +6,6 @@ import com.challenge.rickandmorty.feature.character.domain.usecase.state.Charact
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterUseCase {
-    suspend fun loadData(): Flow<PagingData<CharacterData>>
-    //suspend fun loadData(): Flow<CharacterStateDomain>
+    //suspend fun loadData(): Flow<PagingData<CharacterData>>
+    suspend fun loadData(): Flow<CharacterStateDomain>
 }

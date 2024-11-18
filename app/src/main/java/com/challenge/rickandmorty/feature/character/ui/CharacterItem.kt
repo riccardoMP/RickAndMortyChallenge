@@ -32,7 +32,6 @@ import com.challenge.rickandmorty.feature.character.ui.component.CharacterInfo
 fun CharacterItem(
     character: CharacterData,
     onClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
 
     AnimatedVisibility(
@@ -41,18 +40,17 @@ fun CharacterItem(
         exit = fadeOut()
     ) {
         Card(
-            modifier = modifier
+            modifier = Modifier
                 .animateContentSize()
-                .padding(8.dp)
+                .padding(horizontal = 12.dp, vertical = 8.dp)
                 .clickable {
                     onClick(character.id)
                 },
             shape = RoundedCornerShape(8.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
-
             Row(
-                modifier = modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 AsyncImage(
@@ -61,31 +59,10 @@ fun CharacterItem(
                     contentScale = ContentScale.Fit,
                     contentDescription = null,
                 )
-                CharacterInfo(
-                    data = character, modifier = Modifier
-                        .fillMaxSize()
-                        .padding(4.dp)
-                )
+                CharacterInfo(data = character, modifier = Modifier
+                    .fillMaxSize()
+                    .padding(4.dp))
             }
         }
     }
-
-
 }
-
-/*@Preview
-@Composable
-fun PokemonItemPreview() {
-    PokemonPagerTheme {
-        Surface {
-            PokemonItem(
-                pokemon = Pokemon(
-                    id = 1,
-                    name = "Bulbasaur",
-                    imageUrl = "",
-                ),
-                onClick = {},
-            )
-        }
-    }
-}*/

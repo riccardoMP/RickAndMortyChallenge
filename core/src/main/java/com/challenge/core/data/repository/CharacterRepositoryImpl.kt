@@ -34,4 +34,8 @@ internal class CharacterRepositoryImpl @Inject constructor(
             },
         ).flow
     }
+
+    override suspend fun getACharacterDetails(id: Int): CharacterEntity {
+        TODO("Not yet implemented")
+    }
 }
