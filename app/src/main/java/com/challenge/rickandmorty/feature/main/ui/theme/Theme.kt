@@ -1,6 +1,5 @@
-package com.challenge.rickandmorty.ui.theme
+package com.challenge.rickandmorty.feature.main.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

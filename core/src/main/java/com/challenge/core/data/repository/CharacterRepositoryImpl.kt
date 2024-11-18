@@ -18,9 +18,13 @@ internal class CharacterRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
 ) : CharacterRepository {
 
+    companion object {
+        const val MAX_PAGE_SIZE = 10
+    }
+
     override suspend fun getAllCharacters(): Flow<PagingData<CharacterEntity>> {
         return Pager(
-            config = PagingConfig(pageSize = 20),
+            config = PagingConfig(pageSize = MAX_PAGE_SIZE),
             remoteMediator = CharacterRemoteMediator(
                 localDatabase = database,
                 apiService = apiService,
