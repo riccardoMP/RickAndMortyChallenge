@@ -1,5 +1,6 @@
 package com.country.styles.topbar
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,5 +37,35 @@ fun TopBar(navController: NavHostController, modifier: Modifier = Modifier) {
                 }
             }
         },
+    )
+}
+
+
+@Composable
+@ExperimentalMaterial3Api
+fun CustomTopAppBar(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    title: String,
+    actions: @Composable (RowScope.() -> Unit)? = null
+) {
+    val showBackButton: Boolean = navController.previousBackStackEntry != null
+
+    TopAppBar(
+        modifier = modifier,
+        title = { Text(title) },
+        navigationIcon = {
+            if (showBackButton) {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = null,
+                    )
+                }
+            }
+        },
+        actions = { actions?.invoke(this) }
     )
 }
