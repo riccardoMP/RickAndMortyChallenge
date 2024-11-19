@@ -1,12 +1,10 @@
 package com.challenge.rickandmorty.feature.character.viewmodel
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.challenge.rickandmorty.feature.character.domain.model.CharacterData
 import com.challenge.rickandmorty.feature.character.domain.usecase.CharacterUseCase
-import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.DataError
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.DataReady
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.Loading
@@ -26,25 +24,23 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class CharacterViewModel @Inject constructor(
+class CharacterListViewModel @Inject constructor(
     private val useCase: CharacterUseCase
 ) : ViewModel() {
 
+    val lazyListState = LazyListState()
     private val _uiState = MutableStateFlow<CharacterUIState>(OnLoading)
 
     val uiState: StateFlow<CharacterUIState> = _uiState
         .flatMapLatest {
             useCase.loadData().map { result ->
-
                 when (result) {
                     is Loading -> OnLoading
                     is DataReady -> OnDataReady(
                         result.dataList.cachedIn(viewModelScope)
                     )
-
                     is DataError -> OnDataError(result.error)
                 }
-
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), OnLoading)

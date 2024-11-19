@@ -11,6 +11,7 @@ import com.challenge.rickandmorty.feature.character.domain.usecase.state.Charact
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -20,16 +21,18 @@ internal class CharacterUseCaseImpl @Inject constructor(
 ) : CharacterUseCase {
 
     override suspend fun loadData(name: String?): Flow<CharacterStateDomain> = flow {
-        emit(Loading)
+        if (name?.isEmpty() == true) {
+            emit(DataReady(dataList = flowOf(PagingData.empty())))
+            return@flow
+        }
 
+        emit(Loading)
         val data: Flow<PagingData<CharacterData>> =
             repository.getAllCharacters(name = name).map { pagingData ->
                 pagingData.map {
                     it.toCharacterData()
                 }
             }
-
         emit(DataReady(data))
-
     }.flowOn(Dispatchers.IO)
 }

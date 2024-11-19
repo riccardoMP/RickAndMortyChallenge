@@ -11,8 +11,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.challenge.rickandmorty.feature.character.ui.CharacterListScreen
-import com.challenge.rickandmorty.feature.character.viewmodel.CharacterViewModel
-import com.challenge.rickandmorty.feature.details.ui.CountryDetailsScreen
+import com.challenge.rickandmorty.feature.character.ui.CharacterSearchScreen
+import com.challenge.rickandmorty.feature.character.viewmodel.CharacterListViewModel
+import com.challenge.rickandmorty.feature.character.viewmodel.CharacterSearchViewModel
+import com.challenge.rickandmorty.feature.details.ui.CharacterDetailsScreen
 import com.challenge.rickandmorty.feature.details.viewmodel.CharacterDetailsViewModel
 import com.challenge.rickandmorty.util.Screen
 
@@ -27,11 +29,12 @@ fun RickMortyNavHost() {
         startDestination = Screen.RickMortyScreen.route
     ) {
         composable(route = Screen.RickMortyScreen.route) {
-            val viewModel = hiltViewModel<CharacterViewModel>()
+            val viewModel = hiltViewModel<CharacterListViewModel>()
 
             CharacterListScreen(
                 navHostController = navController,
                 uiState = viewModel.uiState.collectAsState(),
+                lazyListState = viewModel.lazyListState
             )
         }
 
@@ -40,9 +43,21 @@ fun RickMortyNavHost() {
         ) {
             val viewModel = hiltViewModel<CharacterDetailsViewModel>()
 
-            CountryDetailsScreen(
+            CharacterDetailsScreen(
                 navHostController = navController,
                 uiState = viewModel.uiState.collectAsState(),
+            )
+        }
+
+        composable(route = Screen.SearchScreen.route) {
+            val viewModel = hiltViewModel<CharacterSearchViewModel>()
+
+            CharacterSearchScreen (
+                navHostController = navController,
+                uiState = viewModel.uiState.collectAsState(),
+                searchQuery = viewModel.searchQuery.collectAsState().value,
+                onValueChange = viewModel::updateSearchQuery,
+                navigateUp = navController::navigateUp
             )
         }
     }

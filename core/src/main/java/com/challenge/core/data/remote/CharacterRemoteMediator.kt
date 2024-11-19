@@ -13,7 +13,6 @@ import com.challenge.core.data.remote.model.CharacterDto
 import com.challenge.core.util.getPageIntFromUrl
 import javax.inject.Inject
 
-
 @ExperimentalPagingApi
 internal class CharacterRemoteMediator @Inject constructor(
     private val localDatabase: LocalDatabase,
@@ -28,54 +27,65 @@ internal class CharacterRemoteMediator @Inject constructor(
         state: PagingState<Int, CharacterEntity>,
     ): MediatorResult {
         return try {
-            val pageNumber: Int = when (loadType) {
-                LoadType.REFRESH -> 0
-                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -> {
-                    // RETRIEVE NEXT OFFSET FROM DATABASE
-                    val remoteKey: RemoteKeyEntity? =
-                        localDatabase.remoteKeyDao.getById(remoteKeyId)
-                    if (remoteKey == null || remoteKey.nextPage == 0) // END OF PAGINATION REACHED
-                        return MediatorResult.Success(endOfPaginationReached = true)
-                    remoteKey.nextPage
-                }
-            }
+
+            val pageNumber: Int = getPageNumber(loadType) ?: return MediatorResult.Success(
+                endOfPaginationReached = true
+            )
+
             // MAKE API CALL
-            val characterDto : CharacterDto = apiService.getCharacters(page = pageNumber, name = name)
+            val characterDto: CharacterDto =
+                apiService.getCharacters(page = pageNumber, name = name)
             val characterEntityList: List<CharacterEntity> = characterDto.results.map { resultDto ->
                 resultDto.toCharacter()
             }
+            val nextPage: Int? = extractNextPage(characterDto)
 
-            var nextPage: Int? = null
-            if (characterDto.info.next != null) {
-
-                /** fetching next Page works with production code but fails on unit tests due to android depedency
-                 * val uri = Uri.parse(charactersResponse.info.next)
-                 * nextpage = uri.getQueryParameter("page")?.toInt()
-                 */
-
-                nextPage = getPageIntFromUrl(characterDto.info.next)
-            }
-
-            // SAVE RESULTS AND NEXT OFFSET TO DATABASE
-            localDatabase.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    // IF REFRESHING, CLEAR DATABASE FIRST
-                    localDatabase.characterDao.clearAll()
-                    localDatabase.remoteKeyDao.deleteById(remoteKeyId)
-                }
-                localDatabase.characterDao.insertAll(characterEntityList)
-                localDatabase.remoteKeyDao.insert(
-                    RemoteKeyEntity(
-                        id = remoteKeyId,
-                        nextPage = nextPage ?: 0,
-                    )
-                )
-            }
-            // CHECK IF END OF PAGINATION REACHED
+            saveResultsToDatabase(
+                loadType = loadType,
+                characterEntityList = characterEntityList,
+                nextPage = nextPage
+            )
+            // CHECK IF END OF PAGINYATION REACHED
             MediatorResult.Success(endOfPaginationReached = characterDto.info.count < state.config.pageSize)
         } catch (e: Exception) {
             MediatorResult.Error(e)
+        }
+    }
+
+    private suspend fun getPageNumber(loadType: LoadType): Int? {
+        return when (loadType) {
+            LoadType.REFRESH -> 0
+            LoadType.PREPEND -> null
+            LoadType.APPEND -> {
+                val remoteKey: RemoteKeyEntity? = localDatabase.remoteKeyDao.getById(remoteKeyId)
+                if (remoteKey == null || remoteKey.nextPage == 0) // END OF PAGINATION REACHED
+                    return null
+                remoteKey.nextPage
+            }
+        }
+    }
+
+    fun extractNextPage(characterDto: CharacterDto): Int? {
+        return characterDto.info.next?.let { getPageIntFromUrl(it) }
+    }
+
+    private suspend fun saveResultsToDatabase(
+        loadType: LoadType,
+        characterEntityList: List<CharacterEntity>,
+        nextPage: Int?
+    ) = with(localDatabase) {
+        withTransaction {
+            if (loadType == LoadType.REFRESH) {
+                characterDao.clearAll()
+                remoteKeyDao.deleteById(remoteKeyId)
+            }
+            characterDao.insertAll(characterEntityList)
+            remoteKeyDao.insert(
+                RemoteKeyEntity(
+                    id = remoteKeyId,
+                    nextPage = nextPage ?: 0,
+                )
+            )
         }
     }
 }

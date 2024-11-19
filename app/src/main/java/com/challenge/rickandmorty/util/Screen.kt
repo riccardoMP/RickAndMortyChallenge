@@ -14,4 +14,6 @@ sealed class Screen(val route: String) {
             return this.route.replace(oldValue = "{$CHARACTER_ID}", newValue = id.toString())
         }
     }
+
+    data object SearchScreen : Screen("SearchScreen")
 }

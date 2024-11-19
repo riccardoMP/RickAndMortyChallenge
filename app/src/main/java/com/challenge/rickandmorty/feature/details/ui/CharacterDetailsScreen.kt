@@ -20,7 +20,7 @@ import com.country.styles.component.topbar.CustomTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryDetailsScreen(
+fun CharacterDetailsScreen(
     navHostController: NavHostController,
     uiState: State<CharacterDetailsUIState>,
 ) {
@@ -43,7 +43,5 @@ fun CountryDetailsScreen(
             is OnDataError -> ErrorScreen(errorMessage = response.error)
             is OnLoading -> LoadingScreen()
         }
-
-
     }
 }
