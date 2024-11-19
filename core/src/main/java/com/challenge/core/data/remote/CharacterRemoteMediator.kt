@@ -18,6 +18,7 @@ import javax.inject.Inject
 internal class CharacterRemoteMediator @Inject constructor(
     private val localDatabase: LocalDatabase,
     private val apiService: ApiService,
+    private val name: String? = null,
 ) : RemoteMediator<Int, CharacterEntity>() {
 
     private val remoteKeyId = "rick_and_morty"
@@ -40,7 +41,7 @@ internal class CharacterRemoteMediator @Inject constructor(
                 }
             }
             // MAKE API CALL
-            val characterDto : CharacterDto = apiService.getCharacters(page = pageNumber)
+            val characterDto : CharacterDto = apiService.getCharacters(page = pageNumber, name = name)
             val characterEntityList: List<CharacterEntity> = characterDto.results.map { resultDto ->
                 resultDto.toCharacter()
             }

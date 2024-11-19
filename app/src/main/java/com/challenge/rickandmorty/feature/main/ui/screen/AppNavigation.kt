@@ -35,10 +35,9 @@ fun RickMortyNavHost() {
             )
         }
 
-        composable(route = Screen.DetailsScreen.route, arguments = listOf(
-            navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType }
-        )) {
-
+        composable(route = Screen.DetailsScreen.route,
+            arguments = listOf(navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType })
+        ) {
             val viewModel = hiltViewModel<CharacterDetailsViewModel>()
 
             CountryDetailsScreen(
