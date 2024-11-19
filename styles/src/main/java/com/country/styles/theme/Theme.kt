@@ -1,4 +1,4 @@
-package com.challenge.rickandmorty.feature.main.ui.theme
+package com.country.styles.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -9,6 +9,12 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.country.styles.theme.Pink40
+import com.country.styles.theme.Pink80
+import com.country.styles.theme.Purple40
+import com.country.styles.theme.Purple80
+import com.country.styles.theme.PurpleGrey40
+import com.country.styles.theme.PurpleGrey80
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -21,15 +27,6 @@ private val LightColorScheme = lightColorScheme(
     secondary = PurpleGrey40,
     tertiary = Pink40
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
 @Composable

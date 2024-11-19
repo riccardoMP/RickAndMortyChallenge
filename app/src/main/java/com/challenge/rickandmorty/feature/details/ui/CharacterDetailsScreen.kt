@@ -1,22 +1,26 @@
 package com.challenge.rickandmorty.feature.details.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.challenge.rickandmorty.R
-import com.country.styles.topbar.CustomTopAppBar
+import com.challenge.rickandmorty.feature.details.ui.view.CharacterDetailContent
+import com.challenge.rickandmorty.feature.details.viewmodel.state.CharacterDetailsUIState
+import com.country.styles.component.error.ErrorScreen
+import com.country.styles.component.loading.LoadingScreen
+import com.country.styles.component.topbar.CustomTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryDetailsScreen(navHostController: NavHostController) {
-
+fun CountryDetailsScreen(
+    navHostController: NavHostController,
+    uiState: State<CharacterDetailsUIState>,
+) {
     Scaffold(
         topBar = {
             CustomTopAppBar(
@@ -26,13 +30,17 @@ fun CountryDetailsScreen(navHostController: NavHostController) {
         }
     ) { innerPadding ->
 
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        ) {
-            Text("Details")
+        when (val response = uiState.value) {
+            is CharacterDetailsUIState.OnDetailsReady ->
+                CharacterDetailContent(
+                    data = response.data,
+                    modifier = Modifier.padding(innerPadding)
+                )
+
+            is CharacterDetailsUIState.OnDataError -> ErrorScreen(errorMessage = response.error)
+            is CharacterDetailsUIState.OnLoading -> LoadingScreen()
         }
+
 
     }
 }

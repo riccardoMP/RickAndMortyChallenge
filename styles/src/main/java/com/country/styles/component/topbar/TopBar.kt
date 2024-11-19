@@ -1,4 +1,4 @@
-package com.country.styles.topbar
+package com.country.styles.component.topbar
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons

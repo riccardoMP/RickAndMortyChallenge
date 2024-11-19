@@ -8,11 +8,12 @@ plugins {
 
 android {
     namespace = "com.challenge.rickandmorty"
-    compileSdk = 35
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.challenge.rickandmorty"
         minSdk = 24
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -32,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     buildFeatures {
         compose = true

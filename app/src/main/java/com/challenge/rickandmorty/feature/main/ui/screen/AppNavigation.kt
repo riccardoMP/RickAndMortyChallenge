@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import com.challenge.rickandmorty.feature.character.ui.CharacterListScreen
 import com.challenge.rickandmorty.feature.character.viewmodel.CharacterViewModel
 import com.challenge.rickandmorty.feature.details.ui.CountryDetailsScreen
+import com.challenge.rickandmorty.feature.details.viewmodel.CharacterDetailsViewModel
 import com.challenge.rickandmorty.util.Screen
 
 @Composable
@@ -38,7 +39,12 @@ fun RickMortyNavHost() {
             navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType }
         )) {
 
-            CountryDetailsScreen(navHostController = navController)
+            val viewModel = hiltViewModel<CharacterDetailsViewModel>()
+
+            CountryDetailsScreen(
+                navHostController = navController,
+                uiState = viewModel.uiState.collectAsState(),
+            )
         }
     }
 }

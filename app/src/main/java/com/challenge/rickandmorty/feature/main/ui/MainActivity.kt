@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
 import com.challenge.rickandmorty.feature.main.ui.screen.RickMortyNavHost
-import com.challenge.rickandmorty.feature.main.ui.theme.RickAndMortyTheme
+import com.country.styles.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterial3Api

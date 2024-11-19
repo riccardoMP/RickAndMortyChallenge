@@ -1,4 +1,4 @@
-package com.country.styles.loading
+package com.country.styles.component.loading
 
 import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
 import androidx.compose.foundation.layout.Arrangement

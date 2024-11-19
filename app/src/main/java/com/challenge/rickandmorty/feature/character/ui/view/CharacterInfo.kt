@@ -1,4 +1,4 @@
-package com.challenge.rickandmorty.feature.character.ui.component
+package com.challenge.rickandmorty.feature.character.ui.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

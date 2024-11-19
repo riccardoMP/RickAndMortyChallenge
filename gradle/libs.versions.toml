@@ -32,6 +32,7 @@ mockitoKotlin = "5.2.1"
 
 # Project setting versions
 kotlinCompilerExtension = "1.5.11"
+compileSdk = "35"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

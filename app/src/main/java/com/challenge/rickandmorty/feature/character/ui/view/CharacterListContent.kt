@@ -1,4 +1,4 @@
-package com.challenge.rickandmorty.feature.character.ui
+package com.challenge.rickandmorty.feature.character.ui.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

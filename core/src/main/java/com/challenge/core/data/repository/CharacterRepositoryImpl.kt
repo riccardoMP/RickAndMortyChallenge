@@ -8,9 +8,9 @@ import com.challenge.core.data.local.LocalDatabase
 import com.challenge.core.data.local.model.CharacterEntity
 import com.challenge.core.data.remote.ApiService
 import com.challenge.core.data.remote.CharacterRemoteMediator
+import com.challenge.core.data.remote.mapper.toCharacter
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-
 
 @ExperimentalPagingApi
 internal class CharacterRepositoryImpl @Inject constructor(
@@ -35,7 +35,20 @@ internal class CharacterRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getACharacterDetails(id: Int): CharacterEntity {
-        TODO("Not yet implemented")
+
+    override suspend fun getACharacterDetails(id: Int): CharacterEntity? {
+        val characterEntity: CharacterEntity? = database.characterDao.getById(id)
+
+        return characterEntity ?: getCharacterDetailsDto(id)
+    }
+
+    private suspend fun getCharacterDetailsDto(id: Int): CharacterEntity? {
+        return try {
+            val entity: CharacterEntity = apiService.getCharacterDetails(id).toCharacter()
+            database.characterDao.insert(entity)
+            entity
+        } catch (exception: Exception) {
+            null
+        }
     }
 }

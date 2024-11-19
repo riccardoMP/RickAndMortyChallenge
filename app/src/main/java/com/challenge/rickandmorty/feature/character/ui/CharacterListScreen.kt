@@ -14,14 +14,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.challenge.rickandmorty.R
+import com.challenge.rickandmorty.feature.character.ui.view.CharacterListContent
 import com.challenge.rickandmorty.feature.character.viewmodel.state.CharacterUIState
 import com.challenge.rickandmorty.feature.character.viewmodel.state.CharacterUIState.OnDataError
 import com.challenge.rickandmorty.feature.character.viewmodel.state.CharacterUIState.OnDataReady
 import com.challenge.rickandmorty.feature.character.viewmodel.state.CharacterUIState.OnLoading
 import com.challenge.rickandmorty.util.Screen
-import com.country.styles.error.ErrorScreen
-import com.country.styles.loading.LoadingScreen
-import com.country.styles.topbar.CustomTopAppBar
+import com.country.styles.component.error.ErrorScreen
+import com.country.styles.component.loading.LoadingScreen
+import com.country.styles.component.topbar.CustomTopAppBar
 
 @Composable
 @ExperimentalMaterial3Api
