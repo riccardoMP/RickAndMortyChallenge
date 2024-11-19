@@ -1,4 +1,4 @@
-package com.challenge.rickandmorty.ui.theme
+package com.country.styles.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

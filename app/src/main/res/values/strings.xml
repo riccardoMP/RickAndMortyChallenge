@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
+
+    <string name="characters_title">Characters</string>
+    <string name="details_title">Character Detail</string>
+
+    <string name="details_name">Name</string>
+    <string name="details_species">Species</string>
+    <string name="details_gender">Gender</string>
+    <string name="details_location">Location</string>
+    <string name="details_origin">Origin</string>
+    <string name="details_status">Status</string>
+
+    <string name="details_information">Information</string>
+
+    <string name="custom_search_bar_placeholder">Search Characters</string>">
+
 </resources>
