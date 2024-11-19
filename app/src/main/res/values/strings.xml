@@ -8,6 +8,7 @@
     <string name="details_species">Species</string>
     <string name="details_gender">Gender</string>
     <string name="details_location">Location</string>
+    <string name="details_origin">Origin</string>
     <string name="details_status">Status</string>
 
     <string name="details_information">Information</string>

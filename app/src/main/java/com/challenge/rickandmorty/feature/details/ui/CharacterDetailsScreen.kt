@@ -11,6 +11,9 @@ import androidx.navigation.NavHostController
 import com.challenge.rickandmorty.R
 import com.challenge.rickandmorty.feature.details.ui.view.CharacterDetailContent
 import com.challenge.rickandmorty.feature.details.viewmodel.state.CharacterDetailsUIState
+import com.challenge.rickandmorty.feature.details.viewmodel.state.CharacterDetailsUIState.OnDataError
+import com.challenge.rickandmorty.feature.details.viewmodel.state.CharacterDetailsUIState.OnDetailsReady
+import com.challenge.rickandmorty.feature.details.viewmodel.state.CharacterDetailsUIState.OnLoading
 import com.country.styles.component.error.ErrorScreen
 import com.country.styles.component.loading.LoadingScreen
 import com.country.styles.component.topbar.CustomTopAppBar
@@ -31,14 +34,14 @@ fun CountryDetailsScreen(
     ) { innerPadding ->
 
         when (val response = uiState.value) {
-            is CharacterDetailsUIState.OnDetailsReady ->
+            is OnDetailsReady ->
                 CharacterDetailContent(
-                    data = response.data,
+                    list = response.data,
                     modifier = Modifier.padding(innerPadding)
                 )
 
-            is CharacterDetailsUIState.OnDataError -> ErrorScreen(errorMessage = response.error)
-            is CharacterDetailsUIState.OnLoading -> LoadingScreen()
+            is OnDataError -> ErrorScreen(errorMessage = response.error)
+            is OnLoading -> LoadingScreen()
         }
 
 
