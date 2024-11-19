@@ -19,11 +19,11 @@ internal class CharacterUseCaseImpl @Inject constructor(
     private val repository: CharacterRepository,
 ) : CharacterUseCase {
 
-    override suspend fun loadData(): Flow<CharacterStateDomain> = flow {
+    override suspend fun loadData(name: String?): Flow<CharacterStateDomain> = flow {
         emit(Loading)
 
         val data: Flow<PagingData<CharacterData>> =
-            repository.getAllCharacters().map { pagingData ->
+            repository.getAllCharacters(name = name).map { pagingData ->
                 pagingData.map {
                     it.toCharacterData()
                 }

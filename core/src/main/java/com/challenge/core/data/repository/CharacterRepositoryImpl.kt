@@ -22,12 +22,13 @@ internal class CharacterRepositoryImpl @Inject constructor(
         const val MAX_PAGE_SIZE = 10
     }
 
-    override suspend fun getAllCharacters(): Flow<PagingData<CharacterEntity>> {
+    override suspend fun getAllCharacters(name: String?): Flow<PagingData<CharacterEntity>> {
         return Pager(
             config = PagingConfig(pageSize = MAX_PAGE_SIZE),
             remoteMediator = CharacterRemoteMediator(
                 localDatabase = database,
                 apiService = apiService,
+                name = name
             ),
             pagingSourceFactory = {
                 database.characterDao.pagingSource()
