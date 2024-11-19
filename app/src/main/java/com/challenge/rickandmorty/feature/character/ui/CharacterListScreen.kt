@@ -1,6 +1,7 @@
 package com.challenge.rickandmorty.feature.character.ui
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,21 +30,25 @@ import com.country.styles.component.topbar.CustomTopAppBar
 fun CharacterListScreen(
     navHostController: NavHostController,
     uiState: State<CharacterUIState>,
+    lazyListState: LazyListState,
 ) {
+
     Scaffold(
         topBar = {
             CustomTopAppBar(
                 navController = navHostController,
                 title = stringResource(R.string.characters_title),
                 actions = {
-                    IconButton(onClick = { /* Handle search */ }) {
+                    IconButton(onClick = {
+                        val route: String = Screen.SearchScreen.route
+                        navHostController.navigate(route)
+                    }) {
                         Icon(Icons.Filled.Search, contentDescription = "Search")
                     }
                 }
             )
         }
     ) { innerPadding ->
-
         val onCharacterClick: (Int) -> Unit = { id ->
             val route: String = Screen.DetailsScreen.passId(id = id)
             navHostController.navigate(route)
@@ -54,7 +59,8 @@ fun CharacterListScreen(
                 CharacterListContent(
                     characterPagingItems = response.dataList.collectAsLazyPagingItems(),
                     onCharacterClick = onCharacterClick,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
+                    listState = lazyListState
                 )
             }
 

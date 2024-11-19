@@ -1,6 +1,5 @@
 package com.country.styles.component.loading
 
-import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,18 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.country.styles.R
+import com.country.styles.theme.RickAndMortyTheme
 
 @Composable
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    uiMode = UI_MODE_TYPE_NORMAL
-)
 fun LoadingScreen() {
     Column(
         modifier = Modifier
@@ -35,8 +29,7 @@ fun LoadingScreen() {
     ) {
 
         CircularProgressIndicator(
-            modifier = Modifier.testTag(stringResource(R.string.general_loading)),
-            strokeWidth = 4.dp
+            modifier = Modifier.height(30.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -44,5 +37,13 @@ fun LoadingScreen() {
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    RickAndMortyTheme  {
+        LoadingScreen()
     }
 }

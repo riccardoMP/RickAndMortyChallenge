@@ -1,11 +1,8 @@
 package com.challenge.rickandmorty.feature.character.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -22,24 +19,24 @@ import com.challenge.rickandmorty.feature.character.viewmodel.state.CharacterUIS
 import com.challenge.rickandmorty.util.Screen
 import com.country.styles.component.error.ErrorScreen
 import com.country.styles.component.loading.LoadingScreen
-import com.country.styles.component.topbar.CustomTopAppBar
+import com.country.styles.component.searchbar.CustomSearchBar
 
 @Composable
 @ExperimentalMaterial3Api
-fun CharacterListScreen(
+fun CharacterSearchScreen(
     navHostController: NavHostController,
     uiState: State<CharacterUIState>,
+    searchQuery: String,
+    onValueChange: (String) -> Unit,
+    navigateUp: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            CustomTopAppBar(
-                navController = navHostController,
-                title = stringResource(R.string.characters_title),
-                actions = {
-                    IconButton(onClick = { /* Handle search */ }) {
-                        Icon(Icons.Filled.Search, contentDescription = "Search")
-                    }
-                }
+            CustomSearchBar(
+                value = searchQuery,
+                placeholder = stringResource(R.string.custom_search_bar_placeholder),
+                navigateUp = navigateUp,
+                onValueChange = onValueChange
             )
         }
     ) { innerPadding ->
