@@ -2,14 +2,18 @@ package com.challenge.rickandmorty.feature.main.ui.screen
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.navigation.navArgument
 import com.challenge.rickandmorty.feature.character.ui.CharacterListScreen
 import com.challenge.rickandmorty.feature.character.viewmodel.CharacterViewModel
+import com.challenge.rickandmorty.feature.details.ui.CountryDetailsScreen
+import com.challenge.rickandmorty.feature.details.viewmodel.CharacterDetailsViewModel
 import com.challenge.rickandmorty.util.Screen
 
 @Composable
@@ -27,20 +31,20 @@ fun RickMortyNavHost() {
 
             CharacterListScreen(
                 navHostController = navController,
-                characterPagingItems = viewModel.characterPagingDataFlow.collectAsLazyPagingItems(),
-                navigateToDetail = {}
+                uiState = viewModel.uiState.collectAsState(),
             )
         }
 
-        composable(Screen.DetailsScreen.route) { backStackEntry ->
-            /*val latitude = backStackEntry.arguments?.getString(LATITUDE)?.toDoubleOrNull() ?: 0.0
-            val longitude = backStackEntry.arguments?.getString(LONGITUDE)?.toDoubleOrNull() ?: 0.0
+        composable(route = Screen.DetailsScreen.route, arguments = listOf(
+            navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType }
+        )) {
+
+            val viewModel = hiltViewModel<CharacterDetailsViewModel>()
 
             CountryDetailsScreen(
-                navHostController = navigation,
-                latitude = latitude,
-                longitude = longitude
-            )*/
+                navHostController = navController,
+                uiState = viewModel.uiState.collectAsState(),
+            )
         }
     }
 }

@@ -12,6 +12,7 @@ ksp = "1.9.23-1.0.20"
 kotlinSerialization = "1.9.22"
 coil = "2.7.0"
 kotlinSerializationJson = "1.6.3"
+robolectric = "4.13"
 
 retrofit = "2.11.0"
 loggingInterceptor = "4.9.2"
@@ -26,8 +27,12 @@ androidx_room = "2.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 
+mockitoCore = "5.11.0"
+mockitoKotlin = "5.2.1"
+
 # Project setting versions
 kotlinCompilerExtension = "1.5.11"
+compileSdk = "35"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +50,8 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
+
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 
 androidx-paging-runtime =  { module = "androidx.paging:paging-runtime", version.ref = "paging_version"}
 androidx-paging-compose = {module = "androidx.paging:paging-compose",version.ref = "paging-compose"}
@@ -64,6 +71,9 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -48,7 +48,7 @@ internal class CharacterRemoteMediator @Inject constructor(
             var nextPage: Int? = null
             if (characterDto.info.next != null) {
 
-                /** fetching next Page wworks with production code but fails on unit tests due to android depedency
+                /** fetching next Page works with production code but fails on unit tests due to android depedency
                  * val uri = Uri.parse(charactersResponse.info.next)
                  * nextpage = uri.getQueryParameter("page")?.toInt()
                  */

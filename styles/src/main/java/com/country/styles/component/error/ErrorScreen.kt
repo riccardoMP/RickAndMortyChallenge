@@ -1,4 +1,4 @@
-package com.country.styles.error
+package com.country.styles.component.error
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
