@@ -27,12 +27,10 @@ internal class CharacterRemoteMediator @Inject constructor(
         state: PagingState<Int, CharacterEntity>,
     ): MediatorResult {
         return try {
-
             val pageNumber: Int = getPageNumber(loadType) ?: return MediatorResult.Success(
-                endOfPaginationReached = true
+                endOfPaginationReached = true,
             )
 
-            // MAKE API CALL
             val characterDto: CharacterDto =
                 apiService.getCharacters(page = pageNumber, name = name)
             val characterEntityList: List<CharacterEntity> = characterDto.results.map { resultDto ->
@@ -43,9 +41,8 @@ internal class CharacterRemoteMediator @Inject constructor(
             saveResultsToDatabase(
                 loadType = loadType,
                 characterEntityList = characterEntityList,
-                nextPage = nextPage
+                nextPage = nextPage,
             )
-            // CHECK IF END OF PAGINYATION REACHED
             MediatorResult.Success(endOfPaginationReached = characterDto.info.count < state.config.pageSize)
         } catch (e: Exception) {
             MediatorResult.Error(e)
@@ -58,8 +55,10 @@ internal class CharacterRemoteMediator @Inject constructor(
             LoadType.PREPEND -> null
             LoadType.APPEND -> {
                 val remoteKey: RemoteKeyEntity? = localDatabase.remoteKeyDao.getById(remoteKeyId)
-                if (remoteKey == null || remoteKey.nextPage == 0) // END OF PAGINATION REACHED
+                if (remoteKey == null || remoteKey.nextPage == 0) {
+                    // END OF PAGINATION REACHED
                     return null
+                }
                 remoteKey.nextPage
             }
         }
@@ -72,7 +71,7 @@ internal class CharacterRemoteMediator @Inject constructor(
     private suspend fun saveResultsToDatabase(
         loadType: LoadType,
         characterEntityList: List<CharacterEntity>,
-        nextPage: Int?
+        nextPage: Int?,
     ) = with(localDatabase) {
         withTransaction {
             if (loadType == LoadType.REFRESH) {
@@ -84,7 +83,7 @@ internal class CharacterRemoteMediator @Inject constructor(
                 RemoteKeyEntity(
                     id = remoteKeyId,
                     nextPage = nextPage ?: 0,
-                )
+                ),
             )
         }
     }

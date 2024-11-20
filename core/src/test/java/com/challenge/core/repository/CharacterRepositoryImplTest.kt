@@ -8,12 +8,15 @@ import com.challenge.core.data.local.model.CharacterEntity
 import com.challenge.core.data.remote.ApiService
 import com.challenge.core.data.remote.model.CharacterDetailDto
 import com.challenge.core.data.repository.CharacterRepositoryImpl
-import org.junit.Before
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
-import org.junit.Assert.assertEquals
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalPagingApi
@@ -45,7 +48,6 @@ class CharacterRepositoryImplTest {
             CharacterRepositoryImpl(database = localDatabase, apiService = apiService)
     }
 
-
     @Test
     fun `Given an id, When getACharacterDetails is called, Then it should return the CharacterEntity from Database`() =
         runTest {
@@ -59,7 +61,7 @@ class CharacterRepositoryImplTest {
                 origin = "Earth",
                 status = "Alive",
                 species = "Human",
-                type = "Superhero"
+                type = "Superhero",
             )
             `when`(characterDaoMock.getById(id)).thenReturn(expectedCharacter)
 
@@ -82,7 +84,7 @@ class CharacterRepositoryImplTest {
                 origin = "Earth",
                 status = "Alive",
                 species = "Human",
-                type = "Superhero"
+                type = "Superhero",
             )
 
             val dto = CharacterDetailDto(
@@ -96,7 +98,7 @@ class CharacterRepositoryImplTest {
                 species = "Human",
                 type = "Superhero",
                 created = "",
-                image = "url"
+                image = "url",
             )
             `when`(characterDaoMock.getById(id)).thenReturn(null)
             `when`(apiService.getCharacterDetails(id)).thenReturn(dto)

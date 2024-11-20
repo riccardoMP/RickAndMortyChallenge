@@ -26,14 +26,13 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CharacterSearchViewModel @Inject constructor(
-    private val useCase: CharacterUseCase
+    private val useCase: CharacterUseCase,
 ) : ViewModel() {
 
     private val searchQueryStateFlow = MutableStateFlow("")
     val searchQuery: StateFlow<String> = searchQueryStateFlow
 
     private var searchJob: Job? = null
-
 
     val uiState: StateFlow<CharacterUIState> = searchQueryStateFlow
         .flatMapLatest { query ->

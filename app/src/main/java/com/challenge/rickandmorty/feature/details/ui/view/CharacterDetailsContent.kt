@@ -49,7 +49,7 @@ fun DetailContentPreview() {
             Title(R.string.details_location),
             RowInformation(R.string.details_location, "location"),
             Title(R.string.details_origin),
-            RowInformation(R.string.details_origin, "origin")
+            RowInformation(R.string.details_origin, "origin"),
         )
         CharacterDetailContent(list = list)
     }

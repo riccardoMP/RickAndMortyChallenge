@@ -3,7 +3,6 @@ package com.challenge.core.data.remote.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class InfoDto(
     @SerialName("count")
@@ -13,5 +12,5 @@ data class InfoDto(
     @SerialName("pages")
     val pages: Int,
     @SerialName("prev")
-    val prev: String?
+    val prev: String?,
 )

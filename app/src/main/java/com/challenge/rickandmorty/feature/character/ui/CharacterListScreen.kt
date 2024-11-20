@@ -32,7 +32,6 @@ fun CharacterListScreen(
     uiState: State<CharacterUIState>,
     lazyListState: LazyListState,
 ) {
-
     Scaffold(
         topBar = {
             CustomTopAppBar(
@@ -45,9 +44,9 @@ fun CharacterListScreen(
                     }) {
                         Icon(Icons.Filled.Search, contentDescription = "Search")
                     }
-                }
+                },
             )
-        }
+        },
     ) { innerPadding ->
         val onCharacterClick: (Int) -> Unit = { id ->
             val route: String = Screen.DetailsScreen.passId(id = id)
@@ -60,7 +59,7 @@ fun CharacterListScreen(
                     characterPagingItems = response.dataList.collectAsLazyPagingItems(),
                     onCharacterClick = onCharacterClick,
                     modifier = Modifier.padding(innerPadding),
-                    listState = lazyListState
+                    listState = lazyListState,
                 )
             }
 
@@ -69,5 +68,3 @@ fun CharacterListScreen(
         }
     }
 }
-
-

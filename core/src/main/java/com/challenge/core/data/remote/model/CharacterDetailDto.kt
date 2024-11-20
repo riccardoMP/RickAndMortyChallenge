@@ -26,14 +26,14 @@ internal data class CharacterDetailDto(
     @SerialName("type")
     val type: String,
     @SerialName("url")
-    val url: String
+    val url: String,
 ) {
     @Serializable
     data class LocationDto(
         @SerialName("name")
         val name: String,
         @SerialName("url")
-        val url: String
+        val url: String,
     )
 
     @Serializable
@@ -41,6 +41,6 @@ internal data class CharacterDetailDto(
         @SerialName("name")
         val name: String,
         @SerialName("url")
-        val url: String
+        val url: String,
     )
 }

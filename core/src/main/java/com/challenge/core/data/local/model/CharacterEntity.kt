@@ -32,7 +32,7 @@ data class CharacterEntity(
     @ColumnInfo("type")
     val type: String,
 
-    ) {
+) {
     companion object {
         const val TABLE_NAME = "character_table"
     }

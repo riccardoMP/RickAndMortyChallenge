@@ -21,12 +21,11 @@ import com.challenge.rickandmorty.util.Screen
 @Composable
 @ExperimentalMaterial3Api
 fun RickMortyNavHost() {
-
     val navController: NavHostController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = Screen.RickMortyScreen.route
+        startDestination = Screen.RickMortyScreen.route,
     ) {
         composable(route = Screen.RickMortyScreen.route) {
             val viewModel = hiltViewModel<CharacterListViewModel>()
@@ -34,12 +33,13 @@ fun RickMortyNavHost() {
             CharacterListScreen(
                 navHostController = navController,
                 uiState = viewModel.uiState.collectAsState(),
-                lazyListState = viewModel.lazyListState
+                lazyListState = viewModel.lazyListState,
             )
         }
 
-        composable(route = Screen.DetailsScreen.route,
-            arguments = listOf(navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType })
+        composable(
+            route = Screen.DetailsScreen.route,
+            arguments = listOf(navArgument(name = Screen.CHARACTER_ID) { type = NavType.IntType }),
         ) {
             val viewModel = hiltViewModel<CharacterDetailsViewModel>()
 
@@ -52,12 +52,12 @@ fun RickMortyNavHost() {
         composable(route = Screen.SearchScreen.route) {
             val viewModel = hiltViewModel<CharacterSearchViewModel>()
 
-            CharacterSearchScreen (
+            CharacterSearchScreen(
                 navHostController = navController,
                 uiState = viewModel.uiState.collectAsState(),
                 searchQuery = viewModel.searchQuery.collectAsState().value,
                 onValueChange = viewModel::updateSearchQuery,
-                navigateUp = navController::navigateUp
+                navigateUp = navController::navigateUp,
             )
         }
     }

@@ -25,7 +25,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CharacterListViewModel @Inject constructor(
-    private val useCase: CharacterUseCase
+    private val useCase: CharacterUseCase,
 ) : ViewModel() {
 
     val lazyListState = LazyListState()
@@ -37,7 +37,7 @@ class CharacterListViewModel @Inject constructor(
                 when (result) {
                     is Loading -> OnLoading
                     is DataReady -> OnDataReady(
-                        result.dataList.cachedIn(viewModelScope)
+                        result.dataList.cachedIn(viewModelScope),
                     )
                     is DataError -> OnDataError(result.error)
                 }

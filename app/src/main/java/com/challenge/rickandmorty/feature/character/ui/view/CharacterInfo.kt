@@ -26,14 +26,13 @@ import com.challenge.rickandmorty.feature.character.domain.model.CharacterData
 fun CharacterInfo(
     data: CharacterData,
     modifier: Modifier = Modifier,
-    alignment: Alignment.Horizontal = Alignment.Start
+    alignment: Alignment.Horizontal = Alignment.Start,
 ) {
-
     Column(
         modifier = modifier
             .fillMaxHeight()
             .fillMaxWidth(),
-        horizontalAlignment = alignment
+        horizontalAlignment = alignment,
     ) {
         with(data) {
             Text(
@@ -41,7 +40,7 @@ fun CharacterInfo(
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.headlineSmall,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -50,16 +49,15 @@ fun CharacterInfo(
             Text(text = "Status", fontSize = 13.sp)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Box(
                     modifier = Modifier
                         .size(10.dp)
-                        .background(color = colorStatus, shape = CircleShape)
+                        .background(color = colorStatus, shape = CircleShape),
                 )
                 Text(text = status + " - " + species)
             }
         }
-
     }
 }
