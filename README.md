@@ -54,5 +54,5 @@ Tasks -> formatting -> ktlintFormat
 - **Uso de Room para almacenamiento local**: Se eligió Room como solución de base de datos local debido a su simplicidad y su integración con StateFlow, lo que permite que la interfaz de usuario se actualice automáticamente cuando hay cambios en los datos.
 
 - **Retrofit para llamadas a la API**: Retrofit fue seleccionado para manejar las solicitudes de red, debido a su facilidad de uso y su capacidad para convertir automáticamente las respuestas de la API en objetos Java.
-- 
+
 - **KtLint**: Es una herramienta de análisis de código y formateo para Kotlin. Ayuda a mantener un estilo de código consistente en tus proyectos Kotlin al aplicar automáticamente las reglas de estilo y convenciones recomendadas.
