@@ -1,9 +1,8 @@
 package com.challenge.rickandmorty.usecase
 
-import com.challenge.core.data.repository.CharacterRepository
-
 import androidx.paging.PagingData
 import com.challenge.core.data.local.model.CharacterEntity
+import com.challenge.core.data.repository.CharacterRepository
 import com.challenge.rickandmorty.feature.character.domain.usecase.CharacterUseCaseImpl
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.DataReady
@@ -16,7 +15,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 class CharacterUseCaseImplTest {
@@ -57,8 +56,8 @@ class CharacterUseCaseImplTest {
                     origin = "Earth",
                     status = "Alive",
                     species = "Human",
-                    type = "Superhero"
-                )
+                    type = "Superhero",
+                ),
             )
 
             val pagingData = PagingData.from(characterDataList)

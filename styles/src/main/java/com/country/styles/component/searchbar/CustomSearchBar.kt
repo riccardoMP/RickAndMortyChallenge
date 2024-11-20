@@ -18,9 +18,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -40,7 +40,7 @@ fun CustomSearchBar(
     value: String,
     placeholder: String,
     navigateUp: () -> Unit,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -49,7 +49,7 @@ fun CustomSearchBar(
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             IconButton(onClick = { navigateUp() }) {
                 Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
@@ -69,7 +69,7 @@ fun CustomSearchBar(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
+                    unfocusedIndicatorColor = Color.Transparent,
                 ),
                 trailingIcon = {
                     if (value.isNotBlank()) {
@@ -79,20 +79,20 @@ fun CustomSearchBar(
                                 contentDescription = stringResource(R.string.content_description_clear_search),
                                 modifier = Modifier
                                     .padding(end = 8.dp)
-                                    .size(20.dp)
+                                    .size(20.dp),
                             )
                         }
                     }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Done
+                    imeAction = ImeAction.Done,
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
                         focusManager.clearFocus()
-                    }
-                )
+                    },
+                ),
             )
         }
 
@@ -114,6 +114,6 @@ fun PreviewCustomSearchBar() {
         navigateUp = { /* Handle navigation */ },
         onValueChange = { newValue ->
             searchValue = newValue
-        }
+        },
     )
 }

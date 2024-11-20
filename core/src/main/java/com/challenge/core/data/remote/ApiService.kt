@@ -11,12 +11,11 @@ internal interface ApiService {
     @GET("character")
     suspend fun getCharacters(
         @Query("page") page: Int,
-        @Query("name")name: String? = null
+        @Query("name")name: String? = null,
     ): CharacterDto
 
     @GET("character/{character_id}")
     suspend fun getCharacterDetails(
-        @Path("character_id") characterId: Int
+        @Path("character_id") characterId: Int,
     ): CharacterDetailDto
-
 }

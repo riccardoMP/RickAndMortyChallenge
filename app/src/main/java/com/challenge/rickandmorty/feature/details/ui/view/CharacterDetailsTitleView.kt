@@ -1,7 +1,9 @@
 package com.challenge.rickandmorty.feature.details.ui.view
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,24 +20,24 @@ fun CharacterDetailsTitle(title: Int) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = stringResource(id = title),
             modifier = Modifier.padding(12.dp),
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
     }
 }
 
 @Preview(
     showBackground = true,
-    name = "Light Mode"
+    name = "Light Mode",
 )
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "Dark Mode"
+    name = "Dark Mode",
 )
 @Composable
 fun DetailsTitlePreview() {

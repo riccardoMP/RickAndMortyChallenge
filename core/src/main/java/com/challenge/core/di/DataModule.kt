@@ -16,12 +16,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal class DataModule {
 
-
     @Provides
     @Singleton
     fun providesCharacterRepository(
         database: LocalDatabase,
-        apiService: ApiService
+        apiService: ApiService,
     ): CharacterRepository =
         CharacterRepositoryImpl(database = database, apiService = apiService)
 

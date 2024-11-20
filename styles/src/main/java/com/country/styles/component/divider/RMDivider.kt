@@ -19,7 +19,7 @@ fun RMDivider(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
             .height(1.dp),
-        color = DividerDark
+        color = DividerDark,
     )
 }
 

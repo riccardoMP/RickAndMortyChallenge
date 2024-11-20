@@ -20,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    //RETROFIT
+    // RETROFIT
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.logging.interceptor)
@@ -49,13 +49,12 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.paging)
 
-    //HILT
+    // HILT
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    //Serialization
+    // Serialization
     implementation(libs.kotlinSerializationJson)
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
