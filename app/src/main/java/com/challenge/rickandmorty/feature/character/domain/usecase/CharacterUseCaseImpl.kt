@@ -4,8 +4,8 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.challenge.core.data.repository.CharacterRepository
 import com.challenge.rickandmorty.feature.character.domain.mapper.toCharacterData
-import com.challenge.rickandmorty.feature.character.domain.model.CharacterData
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain
+import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.DataError
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.DataReady
 import com.challenge.rickandmorty.feature.character.domain.usecase.state.CharacterStateDomain.Loading
 import kotlinx.coroutines.Dispatchers
@@ -27,12 +27,25 @@ internal class CharacterUseCaseImpl @Inject constructor(
         }
 
         emit(Loading)
-        val data: Flow<PagingData<CharacterData>> =
+        runCatching {
+            repository.getAllCharacters(name = name)
+                .map { pagingData ->
+                    pagingData.map {
+                        it.toCharacterData()
+                    }
+                }
+        }.onSuccess { data ->
+            emit(DataReady(data))
+        }.onFailure { exception ->
+            emit(DataError("Exception")) // Emit error state if fetching fails
+        }
+
+        /*val data: Flow<PagingData<CharacterData>> =
             repository.getAllCharacters(name = name).map { pagingData ->
                 pagingData.map {
                     it.toCharacterData()
                 }
             }
-        emit(DataReady(data))
+        emit(DataReady(data))*/
     }.flowOn(Dispatchers.IO)
 }

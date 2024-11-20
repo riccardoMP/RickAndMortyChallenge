@@ -1,6 +1,5 @@
 package com.challenge.rickandmorty.util
 
-
 sealed class Screen(val route: String) {
 
     companion object {

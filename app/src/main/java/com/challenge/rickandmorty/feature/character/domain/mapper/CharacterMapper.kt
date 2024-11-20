@@ -10,7 +10,6 @@ import com.challenge.rickandmorty.feature.details.domain.model.CharacterDetailDa
 import com.challenge.rickandmorty.feature.details.domain.model.CharacterDetailData.RowInformation
 import com.challenge.rickandmorty.feature.details.domain.model.CharacterDetailData.Title
 
-
 fun CharacterEntity.toCharacterData(): CharacterData {
     val color = when (status) {
         "Alive" -> Color.Green
@@ -24,7 +23,7 @@ fun CharacterEntity.toCharacterData(): CharacterData {
         imageUrl = imageUrl,
         species = species,
         status = status,
-        colorStatus = color
+        colorStatus = color,
     )
 }
 
@@ -42,6 +41,6 @@ fun CharacterEntity.toCharacterDetailData(): List<CharacterDetailData> {
         Title(R.string.details_location),
         RowInformation(R.string.details_location, location),
         Title(R.string.details_origin),
-        RowInformation(R.string.details_origin, origin)
+        RowInformation(R.string.details_origin, origin),
     )
 }

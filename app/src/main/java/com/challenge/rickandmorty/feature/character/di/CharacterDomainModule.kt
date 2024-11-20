@@ -11,12 +11,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-
 class CharacterDomainModule {
 
     @Provides
     @Singleton
     fun providesCharacterUseCase(repository: CharacterRepository): CharacterUseCase =
         CharacterUseCaseImpl(repository = repository)
-
 }

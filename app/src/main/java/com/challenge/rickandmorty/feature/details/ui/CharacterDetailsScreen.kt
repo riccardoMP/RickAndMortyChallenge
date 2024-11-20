@@ -30,14 +30,14 @@ fun CharacterDetailsScreen(
                 navController = navHostController,
                 title = stringResource(R.string.details_title),
             )
-        }
+        },
     ) { innerPadding ->
 
         when (val response = uiState.value) {
             is OnDetailsReady ->
                 CharacterDetailContent(
                     list = response.data,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
                 )
 
             is OnDataError -> ErrorScreen(errorMessage = response.error)

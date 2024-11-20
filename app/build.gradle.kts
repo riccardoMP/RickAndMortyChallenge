@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
-
 }
 
 android {
@@ -28,7 +27,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -65,18 +64,16 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.constraintlayout.compose)
 
-
-
-    //PAGING
+    // PAGING
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
 
-    //HILT
+    // HILT
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    //COIL
+    // COIL
     implementation(libs.coil.compose)
 
     testImplementation(libs.junit)

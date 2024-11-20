@@ -19,7 +19,6 @@ fun CharacterListContent(
     onCharacterClick: (Int) -> Unit,
     listState: LazyListState = rememberLazyListState(),
 ) {
-
     Box(modifier = modifier.fillMaxSize()) {
         LazyColumn(
             state = listState,
@@ -33,7 +32,7 @@ fun CharacterListContent(
                 characterPagingItems[index]?.let { data ->
                     CharacterItem(
                         character = data,
-                        onClick = { onCharacterClick(data.id) }
+                        onClick = { onCharacterClick(data.id) },
                     )
                 }
             }

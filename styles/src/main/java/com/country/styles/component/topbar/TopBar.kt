@@ -18,7 +18,7 @@ fun CustomTopAppBar(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     title: String,
-    actions: @Composable (RowScope.() -> Unit)? = null
+    actions: @Composable (RowScope.() -> Unit)? = null,
 ) {
     val showBackButton: Boolean = navController.previousBackStackEntry != null
 
@@ -37,6 +37,6 @@ fun CustomTopAppBar(
                 }
             }
         },
-        actions = { actions?.invoke(this) }
+        actions = { actions?.invoke(this) },
     )
 }

@@ -16,19 +16,18 @@ import com.country.styles.R
 
 @Composable
 fun ErrorScreen(
-    errorMessage: String?
+    errorMessage: String?,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         Text(
             text = errorMessage ?: stringResource(id = R.string.general_loading),
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.bodyMedium,
-            color = Color.Red
+            color = Color.Red,
         )
     }
 }

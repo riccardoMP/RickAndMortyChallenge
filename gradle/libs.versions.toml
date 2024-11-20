@@ -37,6 +37,9 @@ room-testing = "2.6.1"
 
 constraintlayout-compose = "1.1.0"
 
+ktlint = "0.48.2"
+
+
 # Project setting versions
 kotlinCompilerExtension = "1.5.11"
 compileSdk = "35"
@@ -88,6 +91,10 @@ material = { group = "com.google.android.material", name = "material", version.r
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 
+ktlint = { group = "com.pinterest", name = "ktlint", version.ref = "ktlint" }
+ktlint-core = { group = "com.pinterest.ktlint", name = "ktlint-core", version.ref = "ktlint" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -96,5 +103,6 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 

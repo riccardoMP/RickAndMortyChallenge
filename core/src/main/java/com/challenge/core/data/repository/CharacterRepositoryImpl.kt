@@ -28,14 +28,13 @@ internal class CharacterRepositoryImpl @Inject constructor(
             remoteMediator = CharacterRemoteMediator(
                 localDatabase = database,
                 apiService = apiService,
-                name = name
+                name = name,
             ),
             pagingSourceFactory = {
                 database.characterDao.pagingSource()
             },
         ).flow
     }
-
 
     override suspend fun getACharacterDetails(id: Int): CharacterEntity? {
         val characterEntity: CharacterEntity? = database.characterDao.getById(id)

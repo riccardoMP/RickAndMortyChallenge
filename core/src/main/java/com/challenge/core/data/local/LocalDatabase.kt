@@ -16,4 +16,3 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract val characterDao: CharacterDao
     abstract val remoteKeyDao: RemoteKeyDao
 }
-

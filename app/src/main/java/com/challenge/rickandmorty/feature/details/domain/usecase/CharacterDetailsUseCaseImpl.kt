@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-
 internal class CharacterDetailsUseCaseImpl @Inject constructor(
     private val repository: CharacterRepository,
 ) : CharacterDetailsUseCase {
@@ -28,6 +27,5 @@ internal class CharacterDetailsUseCaseImpl @Inject constructor(
         } else {
             emit(DataError("Error"))
         }
-
     }.flowOn(Dispatchers.IO)
 }

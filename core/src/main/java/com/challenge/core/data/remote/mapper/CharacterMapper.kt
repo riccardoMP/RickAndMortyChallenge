@@ -13,7 +13,6 @@ internal fun CharacterDetailDto.toCharacter(): CharacterEntity {
         species = species,
         location = location.name,
         origin = origin.name,
-        type = type
+        type = type,
     )
 }
-

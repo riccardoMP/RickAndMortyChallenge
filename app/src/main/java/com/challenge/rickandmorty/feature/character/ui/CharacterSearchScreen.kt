@@ -1,7 +1,6 @@
 package com.challenge.rickandmorty.feature.character.ui
 
 import androidx.compose.foundation.layout.padding
-
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -28,7 +27,7 @@ fun CharacterSearchScreen(
     uiState: State<CharacterUIState>,
     searchQuery: String,
     onValueChange: (String) -> Unit,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -36,9 +35,9 @@ fun CharacterSearchScreen(
                 value = searchQuery,
                 placeholder = stringResource(R.string.custom_search_bar_placeholder),
                 navigateUp = navigateUp,
-                onValueChange = onValueChange
+                onValueChange = onValueChange,
             )
-        }
+        },
     ) { innerPadding ->
 
         val onCharacterClick: (Int) -> Unit = { id ->
@@ -51,7 +50,7 @@ fun CharacterSearchScreen(
                 CharacterListContent(
                     characterPagingItems = response.dataList.collectAsLazyPagingItems(),
                     onCharacterClick = onCharacterClick,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
                 )
             }
 
@@ -60,5 +59,3 @@ fun CharacterSearchScreen(
         }
     }
 }
-
-

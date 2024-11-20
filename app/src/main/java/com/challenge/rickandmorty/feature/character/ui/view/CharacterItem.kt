@@ -25,11 +25,10 @@ fun CharacterItem(
     character: CharacterData,
     onClick: (Int) -> Unit,
 ) {
-
     AnimatedVisibility(
         visible = true,
         enter = fadeIn(),
-        exit = fadeOut()
+        exit = fadeOut(),
     ) {
         Card(
             modifier = Modifier
@@ -39,7 +38,7 @@ fun CharacterItem(
                     onClick(character.id)
                 },
             shape = RoundedCornerShape(8.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         ) {
             Row(
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
@@ -51,9 +50,12 @@ fun CharacterItem(
                     contentScale = ContentScale.Fit,
                     contentDescription = null,
                 )
-                CharacterInfo(data = character, modifier = Modifier
-                    .fillMaxSize()
-                    .padding(4.dp))
+                CharacterInfo(
+                    data = character,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(4.dp),
+                )
             }
         }
     }

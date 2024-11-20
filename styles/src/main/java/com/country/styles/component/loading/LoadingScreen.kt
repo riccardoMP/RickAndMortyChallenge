@@ -25,17 +25,16 @@ fun LoadingScreen() {
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = CenterHorizontally
+        horizontalAlignment = CenterHorizontally,
     ) {
-
         CircularProgressIndicator(
-            modifier = Modifier.height(30.dp)
+            modifier = Modifier.height(30.dp),
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.general_loading),
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
         )
     }
 }
@@ -43,7 +42,7 @@ fun LoadingScreen() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    RickAndMortyTheme  {
+    RickAndMortyTheme {
         LoadingScreen()
     }
 }
